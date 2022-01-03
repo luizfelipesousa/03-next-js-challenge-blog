@@ -1,1 +1,27 @@
 // TODO
+.container {
+  margin: 3rem auto;
+  max-width: 720px;
+}
+
+.logo {
+  margin-top: 5rem;
+}
+
+.postInfoContainer {
+  margin-top: 1.5rem;
+  display: flex;
+  color: var(--info);
+
+  .postInfo {
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+
+    time,
+    span {
+      margin-left: 0.5rem;
+      margin-right: 1.5rem;
+    }
+  }
+}
