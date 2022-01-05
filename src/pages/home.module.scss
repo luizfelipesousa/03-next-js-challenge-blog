@@ -1,18 +1,4 @@
 // TODO
-.PostList,
-.loadMore {
+.PostList {
   margin-top: 4rem;
-}
-
-.loadMore {
-  background: none;
-  border: 0;
-  color: var(--highlight);
-  font-weight: 600;
-  font-size: 1.1rem;
-  margin-bottom: 3rem;
-
-  &:hover {
-    text-decoration: underline;
-  }
 }

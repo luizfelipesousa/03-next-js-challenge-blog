@@ -7,6 +7,8 @@ import { getPrismicClient } from '../services/prismic';
 
 import commonStyles from '../styles/common.module.scss';
 import styles from './home.module.scss';
+import PreviewButton from '../components/PreviewButton';
+import { GetStaticProps } from 'next';
 
 interface Post {
   id: string;
@@ -26,9 +28,10 @@ interface PostPagination {
 
 interface HomeProps {
   postsPagination: PostPagination;
+  preview: boolean;
 }
 
-export default function Home({ postsPagination }: HomeProps) {
+export default function Home({ postsPagination, preview }: HomeProps) {
   const [postPages, setPostPages] = useState(postsPagination);
 
   async function handleLoadMorePosts() {
@@ -46,37 +49,40 @@ export default function Home({ postsPagination }: HomeProps) {
   }
 
   return (
-    <>
-      <Header source={false} />
-      <main className={commonStyles.container}>
-        <div className={styles.PostList}>
-          {postPages.results.map((post, index) => (
-            <PostItem post={post} key={index} />
-          ))}
-        </div>
-        {postPages.next_page ? (
-          <button
-            type="button"
-            className={styles.loadMore}
-            onClick={() => handleLoadMorePosts()}
-          >
-            Carregar mais posts
-          </button>
-        ) : (
-          ''
-        )}
-      </main>
-    </>
+    <main className={commonStyles.container}>
+      <div className={styles.PostList}>
+        {postPages.results.map((post, index) => (
+          <PostItem post={post} key={index} />
+        ))}
+      </div>
+      {postPages.next_page ? (
+        <button
+          type="button"
+          className={commonStyles.loadMore}
+          onClick={() => handleLoadMorePosts()}
+        >
+          Carregar mais posts
+        </button>
+      ) : (
+        ''
+      )}
+
+      {preview && <PreviewButton />}
+    </main>
   );
 }
 
-export const getStaticProps = async () => {
+export const getStaticProps: GetStaticProps<HomeProps> = async ({
+  preview = false,
+  previewData,
+}) => {
   const prismic = getPrismicClient();
   const postsResponse = await prismic.query(
     [Prismic.predicates.at('document.type', 'posts')],
     {
       fetch: ['post.title', 'post.subtitle', 'post.author'],
       pageSize: 3,
+      ref: previewData?.ref ?? null,
     }
   );
 
@@ -86,6 +92,6 @@ export const getStaticProps = async () => {
   };
 
   return {
-    props: { postsPagination: postsProps },
+    props: { postsPagination: postsProps, preview },
   };
 };

@@ -9,15 +9,43 @@
 }
 
 .content {
-  margin: 5rem auto;
+  margin: 5rem auto 0;
 
   h1 {
     font-size: 3rem;
     font: 600;
+  }
+
+  em {
+    display: block;
+    margin-top: 1rem;
   }
 }
 
 .postContent {
   margin: 4rem auto;
   text-align: justify;
+}
+
+footer {
+  .postNavigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 3rem;
+    border-top: 1px outset var(--body);
+  }
+  .postNavigation :last-child {
+    text-align: right;
+  }
+
+  .postTitle {
+    font-size: 1.2rem;
+    letter-spacing: -0.5px;
+    color: var(--heading);
+  }
+
+  .comment {
+    margin-top: 5rem;
+  }
 }

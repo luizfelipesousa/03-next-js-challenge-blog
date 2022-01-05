@@ -2,6 +2,7 @@
 .container {
   margin: 3rem auto;
   max-width: 720px;
+  padding: 0 2rem;
 }
 
 .logo {
@@ -23,5 +24,19 @@
       margin-left: 0.5rem;
       margin-right: 1.5rem;
     }
+  }
+}
+
+.loadMore {
+  background: none;
+  border: 0;
+  color: var(--highlight);
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 3rem;
+  margin-top: 4rem;
+
+  &:hover {
+    text-decoration: underline;
   }
 }
